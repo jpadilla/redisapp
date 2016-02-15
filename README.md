@@ -2,6 +2,8 @@
 
 ### The easiest way to get started with Redis on the Mac
 
+![Redis.app Screenshot](https://raw.githubusercontent.com/jpadilla/redisapp/master/screenshot.png)
+
 Forked and adapted from https://github.com/gcollazo/mongodbapp
 
 ## Adding redis binaries to your path
