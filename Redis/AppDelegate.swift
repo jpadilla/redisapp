@@ -10,6 +10,8 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
+    @IBOutlet weak var updater: SUUpdater!
+
     var paths = NSSearchPathForDirectoriesInDomains(
         NSSearchPathDirectory.DocumentDirectory,
         NSSearchPathDomainMask.UserDomainMask, true)
@@ -135,6 +137,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func checkForUpdates(sender: AnyObject?) {
         print("Checking for updates")
+        self.updater.checkForUpdates(sender)
     }
 
     func setupSystemMenuItem() {
