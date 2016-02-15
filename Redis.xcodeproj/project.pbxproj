@@ -246,7 +246,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Redis/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.blimp.Redis.Redis;
+				PRODUCT_BUNDLE_IDENTIFIER = io.blimp.Redis;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -258,7 +258,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Redis/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.blimp.Redis.Redis;
+				PRODUCT_BUNDLE_IDENTIFIER = io.blimp.Redis;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
