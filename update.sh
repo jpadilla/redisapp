@@ -1,9 +1,31 @@
 #!/usr/bin/env bash
 
-# =========================== NEW VERSION INFO =================================
+# =========================== CHECK FORCE FLAG =================================
+if [ "$1" == "--force" ]; then
+  FORCE=true
+fi
+
+# =========================== CURRENT VERSION INFO =============================
+echo "--> Getting version numbers"
+
+CURR_VERSION=$(curl -s https://jpadilla.github.io/redisapp/ | grep -o '<div class="current-version">v.*' | grep -o '[0-9]*\.[0-9]*\.[0-9]*-build\.[0-9]*')
+
+CURR_REDIS=$(echo $CURR_VERSION | grep -o '^[0-9]*\.[0-9]*\.[0-9]*')
+CURR_BUILD=$(echo $CURR_VERSION | grep -o '[0-9]*$')
+
+echo " -- Current Redis.app version: $CURR_BUILD"
+
+# =========================== LATEST VERSION INFO ==============================
 # Get redis latest stable release version
 VERSION=$(curl -s http://download.redis.io/redis-stable/00-RELEASENOTES | grep -o '\-\-\[ Redis .* ]' | head -n 1 | grep -o '[0-9]*\.[0-9]*\.[0-9]*')
 echo "--> Current redis version: $VERSION"
+
+# =========================== COMPARE VERSIONS =================================
+if [ "$FORCE" != true ] && [ "$CURR_REDIS" == "$VERSION" ]; then
+  echo " -- No need to update :)"
+  echo "==> Done!"
+  exit 0
+fi
 
 # =========================== DOWNLOAD =========================================
 # Create download url
@@ -46,60 +68,64 @@ echo "--> Download completed!"
 
 
 # =========================== BUILD ============================================
-BUILD_VERSION="${VERSION}-build.$(date +%s)"
+echo '--> Building'
+# Use sequential build numbers
+if [ "$FORCE" ]; then
+  NEW_BUILD=$((CURR_BUILD + 1))
+else
+  NEW_BUILD=1
+fi
 
-echo "--> Update Info.plist version ${BUILD_VERSION}"
-/usr/libexec/PlistBuddy -c "Set :CFBundleVersion ${BUILD_VERSION}" Redis/Info.plist
-/usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString ${BUILD_VERSION}" Redis/Info.plist
+RELEASE_VERSION="${VERSION}-build.${NEW_BUILD}"
 
-echo "--> Clean build folder"
+echo " -- Update Info.plist version ${RELEASE_VERSION}"
+/usr/libexec/PlistBuddy -c "Set :CFBundleVersion ${RELEASE_VERSION}" Redis/Info.plist
+/usr/libexec/PlistBuddy -c "Set :CFBundleShortVersionString ${RELEASE_VERSION}" Redis/Info.plist
+
+echo " -- Clean build folder"
 rm -rf build/
 
-echo "--> Build with defaults"
+echo " -- Build with defaults"
 xcodebuild
 
-echo "--> Build completed!"
-
+echo " -- Build completed!"
 
 # =========================== RELEASE ==========================================
-echo "--> Zip"
-cd build/Release
-zip -r -y ~/Desktop/Redis.zip Redis.app
-cd ../../
+echo '--> Release'
+echo " -- Zip"
+(cd build/Release; zip -r -y ~/Desktop/Redis.zip Redis.app)
 
 # Get zip file size
 FILE_SIZE=$(du ~/Desktop/Redis.zip | cut -f1)
 
-echo "--> Create AppCast post"
+echo " -- Create AppCast post"
 rm -r ./_posts/release
 mkdir -p ./_posts/release/
 
 echo "---
-version: $BUILD_VERSION
+version: $RELEASE_VERSION
 redis_version: $VERSION
-package_url: https://github.com/jpadilla/redisapp/releases/download/$BUILD_VERSION/Redis.zip
+package_url: https://github.com/jpadilla/redisapp/releases/download/$RELEASE_VERSION/Redis.zip
 package_length: $FILE_SIZE
 category: release
 ---
-
 - Updates redis to $VERSION
-" > ./_posts/release/$(date +"%Y-%m-%d")-${BUILD_VERSION}.md
-
+" > ./_posts/release/$(date +"%Y-%m-%d")-${RELEASE_VERSION}.md
 
 # =========================== PUBLISH ==========================================
 echo ""
 echo "================== Next steps =================="
 echo ""
-echo "git commit -am $BUILD_VERSION"
-echo "git tag $BUILD_VERSION"
+echo "git commit -am $RELEASE_VERSION"
+echo "git tag $RELEASE_VERSION"
 echo "git push origin --tags"
 echo ""
 echo "Upload the zip file to GitHub"
-echo "https://github.com/jpadilla/redisapp/releases/tag/$BUILD_VERSION"
+echo "https://github.com/jpadilla/redisapp/releases/tag/$RELEASE_VERSION"
 echo ""
 echo "git co gh-pages"
 echo "git add ."
-echo "git commit -am 'Release $BUILD_VERSION'"
+echo "git commit -am 'Release $RELEASE_VERSION'"
 echo "git push origin gh-pages"
 echo ""
 echo "==> Done!"
