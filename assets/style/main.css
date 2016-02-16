@@ -1,0 +1,151 @@
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 1.2em;
+  color: #606060;
+  line-height: 1.6em;
+}
+
+a {
+  color: #70c6a4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h3 {
+  color: #000;
+  font-size: 1.3em;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin-top: 45px;
+}
+
+
+pre {
+  background-color: #f7f7f7;
+  display: block;
+  padding: 5px 20px;
+}
+
+pre code {
+  background-color: #f7f7f7;
+}
+
+code {
+  background-color: rgba(0, 0, 0, 0.04);
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
+
+.hero {
+  text-align: center;
+  background: #FF5E3A;
+  background: linear-gradient(to bottom, #FF5E3A 0%,#FF2A68 100%);
+  padding: 50px;
+  color: #FFFFFF;
+  margin-bottom: 30px;
+}
+
+.hero__title {
+  font-size: 2.4em;
+  margin: 0;
+  color: #fff;
+  text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.3);
+}
+
+.hero__subtitle {
+  font-size: 1.2em;
+  margin: 20px auto;
+}
+
+.hero__icon {
+  width: 200px;
+}
+
+.hero a {
+  color: white;
+}
+
+.downloads {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.button {
+  background-color: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 3px;
+  color: #0e6140;
+  display: inline-block;
+  font-size: 1.0em;
+  padding: 15px 30px;
+}
+
+.button:hover {
+  color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+}
+
+.button--secondary {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.versions {
+  font-size: 0.8em;
+  color: rgba(0, 0, 0, 0.4);
+  margin-top: 20px;
+  line-height: 1.2em;
+}
+
+.wrapper {
+  max-width: 600px;
+  margin: 60px auto 0 auto;
+}
+
+.section__title {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.container {
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.img-responsive {
+  width: 100%;
+}
+
+@media (min-width: 0px) and (max-width: 450px) {
+  .hero {
+    padding: 25px;
+  }
+
+  .hero__title {
+    font-size: 2em;
+  }
+
+  .hero__icon {
+    max-width: 100%;
+  }
+
+
+  .button {
+    width: 100%;
+  }
+
+  .button--secondary {
+    margin-top: 10px;
+  }
+
+  .container {
+    padding: 0 10px;
+  }
+}

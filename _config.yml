@@ -1,0 +1,8 @@
+name: Redis.app
+# url: https://jpadilla.github.io/redisapp
+description: The easiest way to get started with Redis on the Mac
+repoUrl: https://github.com/jpadilla/redisapp
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
