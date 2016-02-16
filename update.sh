@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+CURR_DIR=$(pwd)
+
 # =========================== CHECK FORCE FLAG =================================
 if [ "$1" == "--force" ]; then
   FORCE=true
@@ -51,7 +53,9 @@ tar xvzf /tmp/redis.tar.gz -C /tmp
 
 # Compile
 echo "--> Compiling..."
-(cd /tmp/redis-*/; make install PREFIX="../")
+cd /tmp/redis-*/
+make install PREFIX="../"
+cd $CURR_DIR
 
 # move files
 echo "--> Moving files to $VENDOR_DIR"
@@ -76,7 +80,7 @@ else
   NEW_BUILD=1
 fi
 
-RELEASE_VERSION="${VERSION}-build.${NEW_BUILD}"
+export RELEASE_VERSION="${VERSION}-build.${NEW_BUILD}"
 
 echo " -- Update Info.plist version ${RELEASE_VERSION}"
 /usr/libexec/PlistBuddy -c "Set :CFBundleVersion ${RELEASE_VERSION}" Redis/Info.plist
@@ -93,13 +97,15 @@ echo " -- Build completed!"
 # =========================== RELEASE ==========================================
 echo '--> Release'
 echo " -- Zip"
-(cd build/Release; zip -r -y ~/Desktop/Redis.zip Redis.app)
+cd build/Release
+zip -r -y "$CURR_DIR/Redis.zip" Redis.app
+cd ../../
 
 # Get zip file size
-FILE_SIZE=$(du ~/Desktop/Redis.zip | cut -f1)
+FILE_SIZE=$(du "$CURR_DIR/Redis.zip" | cut -f1)
 
 echo " -- Create AppCast post"
-rm -r ./_posts/release
+rm -rf ./_posts/release
 mkdir -p ./_posts/release/
 
 echo "---

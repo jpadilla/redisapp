@@ -1,0 +1,32 @@
+language: objective-c
+osx_image: xcode7.2
+script: ". ./update.sh"
+
+before_deploy:
+  - git config --global user.email "build@jpadilla.com"
+  - git config --global user.name "Build Bot"
+  - git checkout master
+  - git commit -am "Release $RELEASE_VERSION"
+  - git push --quiet https://$GITHUB_ACCESS_TOKEN@github.com/jpadilla/redisapp master > /dev/null 2>&1
+  - git tag $RELEASE_VERSION
+  - git push --quiet --tags https://$GITHUB_ACCESS_TOKEN@github.com/jpadilla/redisapp master > /dev/null 2>&1
+
+deploy:
+  provider: releases
+  api_key: "$GITHUB_ACCESS_TOKEN"
+  file: "Redis.zip"
+  skip_cleanup: true
+  on:
+    branch: master
+
+after_deploy:
+  - rm Redis.zip
+  - git fetch origin gh-pages:gh-pages
+  - git checkout gh-pages
+  - git add .
+  - git commit -am "Release $RELEASE_VERSION"
+  - git push --quiet https://$GITHUB_ACCESS_TOKEN@github.com/jpadilla/redisapp gh-pages > /dev/null 2>&1
+
+branches:
+  only:
+    - master
