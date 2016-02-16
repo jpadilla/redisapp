@@ -22,7 +22,7 @@
         <a href="{{site.repoUrl}}" class="button button--secondary">View on GitHub</a>
         <div class="versions">
           <div class="current-version">v{%for release in site.categories.release limit:1 %}{{release.version}}{% endfor %}</div>
-          Redis.app contains <a href="http://redis.io/download">redis</a> v{%for release in site.categories.release limit:1 %}{{release.mongo_version}}{% endfor %}
+          Redis.app contains <a href="http://redis.io/download">redis</a> v{%for release in site.categories.release limit:1 %}{{release.redis_version}}{% endfor %}
         </div>
       </div>
       <!-- /.downloads -->
@@ -48,6 +48,9 @@
 # Add Redis.app binaries to path
 PATH="/Applications/Redis.app/Contents/Resources/Vendor/redis/bin:$PATH"</code>
       </pre>
+
+      <h3>Credits</h3>
+      <p>Forked and adapted from <a href="https://github.com/gcollazo/mongodbapp">Mongodb.app</a>. Site design by <a href="https://twitter.com/gcollazo">Giovanni Collazo</a>.</p>
     </div>
     <!-- /.container -->
   </body>
