@@ -122,7 +122,7 @@ category: release
 echo ""
 echo "================== Next steps =================="
 echo ""
-echo "git commit -am $RELEASE_VERSION"
+echo "git commit -am 'Release $RELEASE_VERSION'"
 echo "git tag $RELEASE_VERSION"
 echo "git push origin --tags"
 echo ""
