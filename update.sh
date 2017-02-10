@@ -19,7 +19,7 @@ echo " -- Current Redis.app version: $CURR_BUILD"
 
 # =========================== LATEST VERSION INFO ==============================
 # Get redis latest stable release version
-VERSION=$(curl -s http://download.redis.io/redis-stable/00-RELEASENOTES | grep -o '\-\-\[ Redis .* ]' | head -n 1 | grep -o '[0-9]*\.[0-9]*\.[0-9]*')
+VERSION=$(curl -s http://download.redis.io/redis-stable/00-RELEASENOTES | grep -o 'Redis .* Released' | head -n 1 | grep -o '[0-9]*\.[0-9]*\.[0-9]*')
 echo "--> Current redis version: $VERSION"
 
 # =========================== COMPARE VERSIONS =================================
