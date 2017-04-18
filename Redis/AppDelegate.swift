@@ -32,6 +32,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var openCLIMenuItem: NSMenuItem = NSMenuItem()
     var openLogsMenuItem: NSMenuItem = NSMenuItem()
     var docsMenuItem: NSMenuItem = NSMenuItem()
+    var redsminMenuItem: NSMenuItem = NSMenuItem()
     var aboutMenuItem: NSMenuItem = NSMenuItem()
     var versionMenuItem: NSMenuItem = NSMenuItem()
     var quitMenuItem: NSMenuItem = NSMenuItem()
@@ -107,6 +108,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             NSWorkspace.shared().open(url)
         }
     }
+    
+    func openRedsminGUI(send: AnyObject) {
+        if let url: NSURL = NSURL(string: "https://redsmin.com/") {
+            NSWorkspace.sharedWorkspace().openURL(url)
+        }
+    }
 
     func openLogsDirectory(_ send: AnyObject) {
         NSWorkspace.shared().openFile(self.logPath)
@@ -173,6 +180,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         openLogsMenuItem.title = "Open logs directory"
         openLogsMenuItem.action = #selector(AppDelegate.openLogsDirectory(_:))
         menu.addItem(openLogsMenuItem)
+        
+        // Add open Redsmin to menu
+        redsminMenuItem.title = "Open Redsmin Redis GUI"
+        redsminMenuItem.action = Selector("openRedsminGUI:")
+        menu.addItem(redsminMenuItem)
 
         // Add separator
         menu.addItem(NSMenuItem.separator())
@@ -191,7 +203,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         docsMenuItem.title = "Documentation..."
         docsMenuItem.action = #selector(AppDelegate.openDocumentationPage(_:))
         menu.addItem(docsMenuItem)
-
+        
         // Add separator
         menu.addItem(NSMenuItem.separator())
 
