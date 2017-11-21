@@ -80,15 +80,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
             if appExists("iTerm") {
                 source = "tell application \"iTerm\" \n" +
-                    "activate \n" +
-                    "set newTerminal to (make new terminal) \n" +
-                    "tell newTerminal \n" +
-                    "launch session \"Default Session\" \n" +
-                    "tell the last session \n" +
-                    "write text \"\(path)\" \n" +
-                    "end tell \n" +
-                    "end tell \n" +
-                "end tell"
+                            "activate \n" +
+                            "create window with default profile \n" +
+                            "tell current session of current window \n" +
+                                "write text \"\(path)\" \n" +
+                            "end tell \n" +
+                        "end tell"
             } else {
                 source = "tell application \"Terminal\" \n" +
                     "activate \n" +
