@@ -30,7 +30,7 @@ PATH="/Applications/Redis.app/Contents/Resources/Vendor/redis/bin:$PATH"
 You can also install Redis.app with [Homebrew Cask](http://caskroom.io/).
 
 ```bash
-$ brew cask install redis
+$ brew cask install redis-app
 ```
 
 ### Credits
