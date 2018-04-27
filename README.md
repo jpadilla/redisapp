@@ -25,6 +25,13 @@ If you need to add the Redis binaries to your path you can do so by adding the f
 PATH="/Applications/Redis.app/Contents/Resources/Vendor/redis/bin:$PATH"
 ```
 
+Or using the `path_helper` alternative:
+
+```bash
+sudo mkdir -p /etc/paths.d &&
+echo /Applications/Redis.app/Contents/Resources/Vendor/redis/bin | sudo tee /etc/paths.d/redisapp
+```
+
 ### Installing with Homebrew Cask
 
 You can also install Redis.app with [Homebrew Cask](http://caskroom.io/).
