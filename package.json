@@ -1,0 +1,37 @@
+{
+  "name": "redisapp",
+  "version": "0.0.1",
+  "description": "The easiest way to get started with Redis on the Mac",
+  "main": "app/index.js",
+  "license": "MIT",
+  "repository": "https://github.com/jpadilla/redisapp",
+  "author": {
+    "name": "José Padilla",
+    "email": "hello@jpadilla.com",
+    "url": "http://jpadilla.com"
+  },
+  "scripts": {
+    "start": "electron .",
+    "build:dir": "electron-builder --dir",
+    "build": "electron-builder",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "build": {
+    "productName": "Redis",
+    "appId": "com.jpadilla.redisapp",
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "publish": ["github"]
+    },
+    "extraFiles": [
+      {
+        "from": "app/vendor",
+        "to": "Vendor"
+      }
+    ]
+  },
+  "devDependencies": {
+    "electron": "^3.0.10",
+    "electron-builder": "^20.38.2"
+  }
+}
