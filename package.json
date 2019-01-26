@@ -21,7 +21,9 @@
     "appId": "com.jpadilla.redisapp",
     "mac": {
       "category": "public.app-category.developer-tools",
-      "publish": ["github"]
+      "publish": [
+        "github"
+      ]
     },
     "extraFiles": [
       {

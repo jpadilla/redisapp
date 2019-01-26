@@ -1,6 +1,6 @@
 {
   "name": "redisapp",
-  "version": "5.0.2-build.1",
+  "version": "5.0.3-build.1",
   "description": "The easiest way to get started with Redis on the Mac",
   "main": "index.js",
   "license": "MIT",

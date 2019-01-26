@@ -18,6 +18,7 @@ const VENDOR_PATH = app.isPackaged
   ? path.join(process.resourcesPath, '../Vendor')
   : path.join(__dirname, 'vendor');
 const REDIS_PATH = path.join(VENDOR_PATH, 'redis');
+const REDIS_CLI_PATH = path.join(REDIS_PATH, 'bin/redis-cli');
 const REDIS_SERVER_PATH = path.join(REDIS_PATH, 'bin/redis-server');
 const REDIS_CONFIG_PATH = path.join(REDIS_PATH, 'redis.conf');
 const USER_DATA_PATH = app.getPath('userData');
@@ -64,6 +65,35 @@ function openDocumentation() {
   shell.openExternal('https://github.com/jpadilla/redisapp');
 }
 
+function openLogs() {
+  shell.openItem(LOG_FILE_PATH);
+}
+
+function openCLI() {
+  let applescript;
+
+  if (process.env.TERM_PROGRAM === 'iTerm.app') {
+    applescript = `osascript <<'EOF'
+      tell application "iTerm"
+        activate
+        create window with default profile
+        tell current session of current window
+          write text "${REDIS_CLI_PATH}"
+        end tell
+      end tell
+      EOF`;
+  } else {
+    applescript = `osascript <<'EOF'
+      tell application "Terminal"
+        activate
+        do script "${REDIS_CLI_PATH}"
+      end tell
+      EOF`;
+  }
+
+  return child_process.execSync(applescript);
+}
+
 function createTrayMenu() {
   let menu = Menu.buildFromTemplate([
     {
@@ -78,10 +108,12 @@ function createTrayMenu() {
       type: 'separator'
     },
     {
-      label: 'Open redis-cli'
+      label: 'Open redis-cli',
+      click: openCLI
     },
     {
-      label: 'Open logs directory'
+      label: 'Open logs',
+      click: openLogs
     },
     {
       type: 'separator'
@@ -90,11 +122,12 @@ function createTrayMenu() {
       label: 'Check for updates...'
     },
     {
-      label: 'About'
-    },
-    {
       label: 'Documentation',
       click: openDocumentation
+    },
+    {
+      label: 'About',
+      role: 'about'
     },
     {
       type: 'separator'
