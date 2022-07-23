@@ -24,7 +24,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var pipe: Pipe = Pipe()
     var file: FileHandle
 
-    var statusBar = NSStatusBar.system()
+    var statusBar = NSStatusBar.system
     var statusBarItem: NSStatusItem = NSStatusItem()
     var menu: NSMenu = NSMenu()
 
@@ -74,7 +74,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         print(output)
     }
 
-    func openCLI(_ sender: AnyObject) {
+    @objc func openCLI(_ sender: AnyObject) {
         if let path = Bundle.main.path(forResource: "redis-cli", ofType: "", inDirectory: "Vendor/redis/bin") {
             var source: String
 
@@ -99,14 +99,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    func openDocumentationPage(_ send: AnyObject) {
+    @objc func openDocumentationPage(_ send: AnyObject) {
         if let url: URL = URL(string: "https://github.com/jpadilla/redisapp") {
-            NSWorkspace.shared().open(url)
+            NSWorkspace.shared.open(url)
         }
     }
 
-    func openLogsDirectory(_ send: AnyObject) {
-        NSWorkspace.shared().openFile(self.logPath)
+    @objc func openLogsDirectory(_ send: AnyObject) {
+        NSWorkspace.shared.openFile(self.logPath)
     }
 
     func createDirectories() {
@@ -132,7 +132,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         print("Redis logs directory: \(self.logPath)")
     }
 
-    func checkForUpdates(_ sender: AnyObject?) {
+    @objc func checkForUpdates(_ sender: AnyObject?) {
         print("Checking for updates")
         self.updater.checkForUpdates(sender)
     }
@@ -194,7 +194,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         // Add quitMenuItem to menu
         quitMenuItem.title = "Quit"
-        quitMenuItem.action = #selector(NSApplication.shared().terminate)
+        quitMenuItem.action = #selector(NSApplication.shared.terminate)
         menu.addItem(quitMenuItem)
     }
 
