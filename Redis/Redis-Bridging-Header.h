@@ -6,4 +6,4 @@
 //  Copyright © 2016 José Padilla. All rights reserved.
 //
 
-#import <Sparkle/Sparkle.h>
+//#import <Sparkle/Sparkle.h>

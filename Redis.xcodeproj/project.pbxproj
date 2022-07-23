@@ -3,16 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		3D4733611C7144F300436F9E /* Vendor in Resources */ = {isa = PBXBuildFile; fileRef = 3D4733601C7144F200436F9E /* Vendor */; };
-		3D6942681C71536A00773365 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D6942671C71536A00773365 /* Sparkle.framework */; };
-		3D69426A1C71542900773365 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3D6942671C71536A00773365 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3D7F38551C702A3000818E3E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D7F38541C702A3000818E3E /* AppDelegate.swift */; };
 		3D7F38571C702A3000818E3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D7F38561C702A3000818E3E /* Assets.xcassets */; };
 		3D7F385A1C702A3000818E3E /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D7F38581C702A3000818E3E /* MainMenu.xib */; };
+		5E0EA038288BF4540087D89B /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 5E0EA037288BF4540087D89B /* Sparkle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -22,7 +21,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				3D69426A1C71542900773365 /* Sparkle.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -30,7 +28,6 @@
 
 /* Begin PBXFileReference section */
 		3D4733601C7144F200436F9E /* Vendor */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Vendor; sourceTree = "<group>"; };
-		3D6942671C71536A00773365 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Redis/Sparkle.framework; sourceTree = "<group>"; };
 		3D69426B1C71560000773365 /* Redis-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Redis-Bridging-Header.h"; sourceTree = "<group>"; };
 		3D7F38511C702A3000818E3E /* Redis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Redis.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D7F38541C702A3000818E3E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -44,7 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3D6942681C71536A00773365 /* Sparkle.framework in Frameworks */,
+				5E0EA038288BF4540087D89B /* Sparkle in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,7 +79,6 @@
 		3D7F38631C702DA200818E3E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				3D6942671C71536A00773365 /* Sparkle.framework */,
 				3D4733601C7144F200436F9E /* Vendor */,
 				3D7F385B1C702A3000818E3E /* Info.plist */,
 			);
@@ -107,6 +103,9 @@
 			dependencies = (
 			);
 			name = Redis;
+			packageProductDependencies = (
+				5E0EA037288BF4540087D89B /* Sparkle */,
+			);
 			productName = Redis;
 			productReference = 3D7F38511C702A3000818E3E /* Redis.app */;
 			productType = "com.apple.product-type.application";
@@ -139,6 +138,9 @@
 				Base,
 			);
 			mainGroup = 3D7F38481C702A3000818E3E;
+			packageReferences = (
+				5E0EA036288BF4540087D89B /* XCRemoteSwiftPackageReference "Sparkle" */,
+			);
 			productRefGroup = 3D7F38521C702A3000818E3E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -265,7 +267,8 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Release;
 		};
@@ -343,6 +346,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5E0EA036288BF4540087D89B /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:sparkle-project/Sparkle.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5E0EA037288BF4540087D89B /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5E0EA036288BF4540087D89B /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3D7F38491C702A3000818E3E /* Project object */;
 }
