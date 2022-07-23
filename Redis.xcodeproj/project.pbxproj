@@ -28,7 +28,6 @@
 
 /* Begin PBXFileReference section */
 		3D4733601C7144F200436F9E /* Vendor */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Vendor; sourceTree = "<group>"; };
-		3D69426B1C71560000773365 /* Redis-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Redis-Bridging-Header.h"; sourceTree = "<group>"; };
 		3D7F38511C702A3000818E3E /* Redis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Redis.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D7F38541C702A3000818E3E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3D7F38561C702A3000818E3E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -71,7 +70,6 @@
 				3D7F38561C702A3000818E3E /* Assets.xcassets */,
 				3D7F38581C702A3000818E3E /* MainMenu.xib */,
 				3D7F38631C702DA200818E3E /* Supporting Files */,
-				3D69426B1C71560000773365 /* Redis-Bridging-Header.h */,
 			);
 			path = Redis;
 			sourceTree = "<group>";
