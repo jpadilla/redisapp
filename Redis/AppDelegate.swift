@@ -7,11 +7,12 @@
 //
 
 import Cocoa
+import Sparkle
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-    @IBOutlet weak var updater: SUUpdater!
-
+    let updaterController: SPUStandardUpdaterController
+    
     var paths = NSSearchPathForDirectoriesInDomains(
         FileManager.SearchPathDirectory.documentDirectory,
         FileManager.SearchPathDomainMask.userDomainMask, true)
@@ -24,7 +25,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var pipe: Pipe = Pipe()
     var file: FileHandle
 
-    var statusBar = NSStatusBar.system()
+    var statusBar = NSStatusBar.system
     var statusBarItem: NSStatusItem = NSStatusItem()
     var menu: NSMenu = NSMenu()
 
@@ -42,6 +43,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.documentsDirectory = self.paths[0] as AnyObject
         self.dataPath = documentsDirectory.appendingPathComponent("RedisData")
         self.logPath = documentsDirectory.appendingPathComponent("RedisData/Logs")
+        self.updaterController = SPUStandardUpdaterController(startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil)
 
         super.init()
     }
@@ -74,7 +76,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         print(output)
     }
 
-    func openCLI(_ sender: AnyObject) {
+    @objc func openCLI(_ sender: AnyObject) {
         if let path = Bundle.main.path(forResource: "redis-cli", ofType: "", inDirectory: "Vendor/redis/bin") {
             var source: String
 
@@ -99,14 +101,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    func openDocumentationPage(_ send: AnyObject) {
+    @objc func openDocumentationPage(_ send: AnyObject) {
         if let url: URL = URL(string: "https://github.com/jpadilla/redisapp") {
-            NSWorkspace.shared().open(url)
+            NSWorkspace.shared.open(url)
         }
     }
 
-    func openLogsDirectory(_ send: AnyObject) {
-        NSWorkspace.shared().openFile(self.logPath)
+    @objc func openLogsDirectory(_ send: AnyObject) {
+        NSWorkspace.shared.openFile(self.logPath)
     }
 
     func createDirectories() {
@@ -132,9 +134,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         print("Redis logs directory: \(self.logPath)")
     }
 
-    func checkForUpdates(_ sender: AnyObject?) {
+    @objc func checkForUpdates(_ sender: AnyObject?) {
         print("Checking for updates")
-        self.updater.checkForUpdates(sender)
+        self.updaterController.checkForUpdates(sender)
     }
 
     func setupSystemMenuItem() {
@@ -194,7 +196,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         // Add quitMenuItem to menu
         quitMenuItem.title = "Quit"
-        quitMenuItem.action = #selector(NSApplication.shared().terminate)
+        quitMenuItem.action = #selector(NSApplication.shared.terminate)
         menu.addItem(quitMenuItem)
     }
 
